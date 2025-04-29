@@ -6,6 +6,7 @@ from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
 import time
 import requests
+import openpyxl
 
 # Importando e inicializando o driver do Chrome
 chrome_options = webdriver.ChromeOptions()
@@ -15,26 +16,26 @@ s = Service("chromedriver.exe")
 driver = webdriver.Chrome(service=s, options=chrome_options)
 
 df = pd.DataFrame(columns=['Time', 'Nome', 'Posição', 'Jogos', 'Gols', 'Assistências', 'Minutos'])
-links = ['https://www.transfermarkt.com.br/athletico-paranaense/leistungsdaten/verein/679/reldata/%262023/plus/1',
-         'https://www.transfermarkt.com.br/atletico-goianiense/leistungsdaten/verein/15172/reldata/%2620231/plus/1',
-         'https://www.transfermarkt.com.br/atletico-mineiro/leistungsdaten/verein/330/reldata/%262023/plus/1',
-         'https://www.transfermarkt.com.br/botafogo-fr/leistungsdaten/verein/537/reldata/%262023/plus/1',
-         'https://www.transfermarkt.com.br/cr-flamengo/leistungsdaten/verein/614/reldata/%262023/plus/1',
-         'https://www.transfermarkt.com.br/cr-vasco-da-gama/leistungsdaten/verein/978/reldata/%262023/plus/1',
-         'https://www.transfermarkt.com.br/criciuma-ec/leistungsdaten/verein/7178/reldata/%262023/plus/1',
-         'https://www.transfermarkt.com.br/cruzeiro-ec/leistungsdaten/verein/609/reldata/%262023/plus/1',
-         'https://www.transfermarkt.com.br/cuiaba-ec/leistungsdaten/verein/28022/reldata/%262023/plus/1',
-         'https://www.transfermarkt.com.br/ec-bahia/leistungsdaten/verein/10010/reldata/%262023/plus/1',
-         'https://www.transfermarkt.com.br/ec-juventude/leistungsdaten/verein/10492/reldata/%262023/plus/1',
-         'https://www.transfermarkt.com.br/ec-vitoria/leistungsdaten/verein/2125/reldata/%262023/plus/1',
-         'https://www.transfermarkt.com.br/fluminense-fc/leistungsdaten/verein/2462/reldata/%262023/plus/1',
-         'https://www.transfermarkt.com.br/fortaleza-ec/leistungsdaten/verein/10870/reldata/%262023/plus/1',
-         'https://www.transfermarkt.com.br/gremio-fbpa/leistungsdaten/verein/210/reldata/%262023/plus/1',
-         'https://www.transfermarkt.com.br/rb-bragantino/leistungsdaten/verein/8793/reldata/%262023/plus/1',
-         'https://www.transfermarkt.com.br/sao-paulo-fc/leistungsdaten/verein/585/reldata/%262023/plus/1',
-         'https://www.transfermarkt.com.br/sc-corinthians/leistungsdaten/verein/199/reldata/%262023/plus/1',
-         'https://www.transfermarkt.com.br/sc-internacional/leistungsdaten/verein/6600/reldata/%262023/plus/1',
-         'https://www.transfermarkt.com.br/se-palmeiras/leistungsdaten/verein/1023/reldata/%262023/plus/1']
+links = ['https://www.transfermarkt.com.br/atletico-mineiro/leistungsdaten/verein/330/reldata/%262024/plus/1',
+         'https://www.transfermarkt.com.br/botafogo-fr/leistungsdaten/verein/537/reldata/%262024/plus/1',
+         'https://www.transfermarkt.com.br/ceara-sc/leistungsdaten/verein/2029/reldata/%262024/plus/1',
+         'https://www.transfermarkt.com.br/cr-flamengo/leistungsdaten/verein/614/reldata/%262024/plus/1',
+         'https://www.transfermarkt.com.br/cr-vasco-da-gama/leistungsdaten/verein/978/reldata/%262024/plus/1',
+         'https://www.transfermarkt.com.br/cruzeiro-ec/leistungsdaten/verein/609/reldata/%262024/plus/1',
+         'https://www.transfermarkt.com.br/ec-bahia/leistungsdaten/verein/10010/reldata/%262024/plus/1',
+         'https://www.transfermarkt.com.br/ec-juventude/leistungsdaten/verein/10492/reldata/%262024/plus/1',
+         'https://www.transfermarkt.com.br/ec-vitoria/leistungsdaten/verein/2125/reldata/%262024/plus/1',
+         'https://www.transfermarkt.com.br/fluminense-fc/leistungsdaten/verein/2462/reldata/%262024/plus/1',
+         'https://www.transfermarkt.com.br/fortaleza-ec/leistungsdaten/verein/10870/reldata/%262024/plus/1',
+         'https://www.transfermarkt.com.br/gremio-fbpa/leistungsdaten/verein/210/reldata/%262024/plus/1',
+         'https://www.transfermarkt.com.br/mirassol-fc/leistungsdaten/verein/3876/reldata/%262024/plus/1',
+         'https://www.transfermarkt.com.br/rb-bragantino/leistungsdaten/verein/8793/reldata/%262024/plus/1',
+         'https://www.transfermarkt.com.br/santos-fc/leistungsdaten/verein/221/reldata/%262024/plus/1',
+         'https://www.transfermarkt.com.br/sao-paulo-fc/leistungsdaten/verein/585/reldata/%262024/plus/1',
+         'https://www.transfermarkt.com.br/sc-corinthians/leistungsdaten/verein/199/reldata/%262024/plus/1',
+         'https://www.transfermarkt.com.br/sc-internacional/leistungsdaten/verein/6600/reldata/%262024/plus/1',
+         'https://www.transfermarkt.com.br/se-palmeiras/leistungsdaten/verein/1023/reldata/%262024/plus/1',
+         'https://www.transfermarkt.com.br/sport-recife/leistungsdaten/verein/8718/reldata/%262024/plus/1']
 
 for link in links:
 
